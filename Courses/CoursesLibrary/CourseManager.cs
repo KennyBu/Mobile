@@ -1,4 +1,6 @@
-﻿namespace CoursesLibrary
+﻿using System;
+
+namespace CoursesLibrary
 {
     public class CourseManager
     {
@@ -37,6 +39,11 @@
             return initCourses;
         }
 
+        public int Length
+        {
+            get { return _courses.Length; }
+        }
+        
         public void MoveFirst()
         {
             _currentIndex = 0;
@@ -48,7 +55,6 @@
             {
                 _currentIndex--;    
             }
-            
         }
 
         public void MoveNext()
@@ -74,6 +80,17 @@
             get { return _currentIndex < _courses.Length - 1; }
         }
 
-
+        public void MoveTo(int position)
+        {
+            if (position >= 0 && position <= _courses.Length - 1)
+            {
+                _currentIndex = position;    
+            }
+            else
+            {
+                throw new IndexOutOfRangeException(string.Format("{0} is an invalid position. Must be between 0 and {1}",
+                    position, _courses.Length - 1));
+            }
+        }
     }
 }
